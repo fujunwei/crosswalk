@@ -73,6 +73,10 @@ class XWalkContent extends FrameLayout implements XWalkPreferencesInternal.KeyVa
     long mNativeContent;
     long mNativeWebContents;
 
+    // True when this XWalkContent has been destroyed.
+    // Do not use directly, call isDestroyed() instead.
+    private boolean mIsDestroyed = false;
+
     static void setJavascriptInterfaceClass(Class<? extends Annotation> clazz) {
       assert(javascriptInterfaceClass == null);
       javascriptInterfaceClass = clazz;
@@ -357,7 +361,7 @@ class XWalkContent extends FrameLayout implements XWalkPreferencesInternal.KeyVa
     }
 
     public void stopLoading() {
-        mWebContents.stop();
+        if (!isDestroyed()) mWebContents.stop();
         mContentsClientBridge.onStopLoading();
     }
 
@@ -549,6 +553,23 @@ class XWalkContent extends FrameLayout implements XWalkPreferencesInternal.KeyVa
         mCleanupReference.cleanupNow();
         mCleanupReference = null;
         mNativeContent = 0;
+        
+        mIsDestroyed = true;
+    }
+
+    private boolean isDestroyed() {
+        if (mIsDestroyed) {
+            assert mContentViewCore == null;
+            assert mWebContents == null;
+            assert mNavigationController == null;
+            assert mNativeContent == 0;
+        } else {
+            assert mContentViewCore != null;
+            assert mWebContents != null;
+            assert mNavigationController != null;
+            assert mNativeContent != 0;
+        }
+        return mIsDestroyed;
     }
 
     public int getRoutingID() {
