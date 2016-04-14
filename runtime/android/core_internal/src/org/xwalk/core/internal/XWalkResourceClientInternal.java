@@ -23,7 +23,10 @@ import java.security.KeyStore.PrivateKeyEntry;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Map;
-
+import android.content.Context;
+import java.util.Map;
+import android.media.MediaPlayer;
+import android.net.Uri;
 
 /**
  * This class notifies the embedder resource events/callbacks.
@@ -256,6 +259,12 @@ public class XWalkResourceClientInternal {
      */
     @XWalkAPI
     public boolean shouldOverrideUrlLoading(XWalkViewInternal view, String url) {
+        return false;
+    }
+
+    @XWalkAPI
+    public boolean shouldOverrideResourceLoading(XWalkViewInternal view,
+            MediaPlayer mediaPlayer, Context context, Uri uri, Map<String, String> headers) {
         return false;
     }
 

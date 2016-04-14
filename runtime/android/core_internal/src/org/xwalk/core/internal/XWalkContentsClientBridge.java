@@ -48,7 +48,10 @@ import org.chromium.net.AndroidPrivateKey;
 import org.chromium.net.DefaultAndroidKeyStore;
 
 import org.xwalk.core.internal.XWalkUIClientInternal.LoadStatusInternal;
-
+import android.content.Context;
+import java.util.Map;
+import android.media.MediaPlayer;
+import android.net.Uri;
 // Help bridge callback in XWalkContentsClient to XWalkViewClient and
 // XWalkWebChromeClient; Also handle the JNI conmmunication logic.
 @JNINamespace("xwalk")
@@ -207,6 +210,16 @@ class XWalkContentsClientBridge extends XWalkContentsClient
     public boolean shouldOverrideUrlLoading(String url) {
         if (mXWalkResourceClient != null && mXWalkView != null) {
             return mXWalkResourceClient.shouldOverrideUrlLoading(mXWalkView, url);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean shouldOverrideResourceLoading(MediaPlayer mediaPlayer,
+            Context context, Uri uri, Map<String, String> headers) {
+        if (mXWalkResourceClient != null && mXWalkView != null) {
+            return mXWalkResourceClient.shouldOverrideResourceLoading(mXWalkView,
+                    mediaPlayer, context, uri, headers);
         }
         return false;
     }

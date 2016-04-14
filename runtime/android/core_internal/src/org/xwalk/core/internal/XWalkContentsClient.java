@@ -32,6 +32,10 @@ import org.chromium.net.AndroidPrivateKey;
 import org.chromium.net.DefaultAndroidKeyStore;
 import org.chromium.net.NetError;
 
+import android.content.Context;
+import java.util.Map;
+import android.media.MediaPlayer;
+import android.net.Uri;
 /**
  * Base-class that a XWalkViewContents embedder derives from to receive callbacks.
  * This extends ContentViewClient, as in many cases we want to pass-thru ContentViewCore
@@ -167,6 +171,8 @@ abstract class XWalkContentsClient extends ContentViewClient {
     public abstract void onLoadResource(String url);
 
     public abstract boolean shouldOverrideUrlLoading(String url);
+
+    public abstract boolean shouldOverrideResourceLoading(MediaPlayer mediaPlayer, Context context, Uri uri, Map<String, String> headers);
 
     public abstract void onUnhandledKeyEvent(KeyEvent event);
 
