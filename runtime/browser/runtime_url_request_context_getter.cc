@@ -103,6 +103,7 @@ RuntimeURLRequestContextGetter::RuntimeURLRequestContextGetter(
   net::ProxyConfigServiceAndroid* android_config_service =
       static_cast<net::ProxyConfigServiceAndroid*>(proxy_config_service_.get());
   android_config_service->set_exclude_pac_url(true);
+  android_proxy_config_service_.reset(android_config_service);
 #else
   proxy_config_service_ = net::ProxyService::CreateSystemProxyConfigService(
       io_loop_->task_runner(), file_loop_->task_runner());
@@ -322,6 +323,21 @@ void RuntimeURLRequestContextGetter::UpdateAcceptLanguages(
   storage_->set_http_user_agent_settings(make_scoped_ptr(
       new net::StaticHttpUserAgentSettings(accept_languages,
                                            xwalk::GetUserAgent())));
+}
+
+void RuntimeURLRequestContextGetter::ProxySettingsChanged(
+    const std::string& host,
+    int port,
+    const std::string& pac_url,
+    const std::vector<std::string>& exclusion_list) {
+  LOG(ERROR) << "==== in RuntimeURLRequestContextGetter::ProxySettingsChanged " << host << " " << port;
+  // net::ProxyConfigServiceAndroid* android_config_service =
+  //     static_cast<net::ProxyConfigServiceAndroid*>(proxy_config_service_.get());
+  if (host.empty()) {
+    android_proxy_config_service_->ProxySettingsChanged();
+  } else {
+    android_proxy_config_service_->ProxySettingsChangedTo(host, port, pac_url, exclusion_list);
+  }
 }
 
 }  // namespace xwalk

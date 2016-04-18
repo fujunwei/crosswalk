@@ -571,4 +571,28 @@ void XWalkContent::SetOriginAccessWhitelist(JNIEnv* env, jobject obj,
       base::android::ConvertJavaStringToUTF8(env, match_patterns));
 }
 
+void XWalkContent::ProxySettingsChanged(
+    JNIEnv* env, jobject obj,
+    jstring jhost,
+    jint jport,
+    jstring jpac_url,
+    jobjectArray jexclusion_list) {
+  DCHECK(BrowserThread::CurrentlyOn(BrowserThread::UI));
+
+  std::string host = base::android::ConvertJavaStringToUTF8(env, jhost);
+
+  std::string pac_url;
+  if (jpac_url)
+    pac_url = base::android::ConvertJavaStringToUTF8(env, jpac_url);
+
+  std::vector<std::string> exclusion_list;
+      base::android::AppendJavaStringArrayToStringVector(
+          env, jexclusion_list, &exclusion_list);
+
+  XWalkBrowserContext* browser_context =
+      XWalkRunner::GetInstance()->browser_context();
+  CHECK(browser_context);
+  browser_context->ProxySettingsChanged(host, jport, pac_url, exclusion_list);
+}
+
 }  // namespace xwalk

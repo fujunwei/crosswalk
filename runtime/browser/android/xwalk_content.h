@@ -87,6 +87,13 @@ class XWalkContent {
   void SetXWalkAutofillClient(jobject client);
   void SetSaveFormData(bool enabled);
 
+  void ProxySettingsChanged(
+      JNIEnv* env, jobject obj,
+      jstring jhost,
+      jint jport,
+      jstring jpac_url,
+      jobjectArray jexclusion_list);
+
  private:
   JavaObjectWeakGlobalRef java_ref_;
   // TODO(guangzhen): The WebContentsDelegate need to take ownership of

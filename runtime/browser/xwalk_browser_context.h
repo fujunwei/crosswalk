@@ -123,6 +123,12 @@ class XWalkBrowserContext
   // visitedlink::VisitedLinkDelegate implementation.
   void RebuildTable(
       const scoped_refptr<URLEnumerator>& enumerator) override;
+
+  void ProxySettingsChanged(
+      const std::string& host,
+      int port,
+      const std::string& pac_url,
+      const std::vector<std::string>& exclusion_list);
 #endif
 
  private:
