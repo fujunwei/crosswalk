@@ -14,6 +14,7 @@
 #include "content/public/browser/content_browser_client.h"
 #include "net/url_request/url_request_context_getter.h"
 #include "net/url_request/url_request_job_factory.h"
+#include "net/proxy/proxy_config_service_android.h"
 
 namespace base {
 class MessageLoop;
@@ -48,6 +49,11 @@ class RuntimeURLRequestContextGetter : public net::URLRequestContextGetter {
   net::HostResolver* host_resolver();
   #if defined(OS_ANDROID)
   void UpdateAcceptLanguages(const std::string& accept_languages);
+  void ProxySettingsChanged(
+      const std::string& host,
+      int port,
+      const std::string& pac_url,
+      const std::vector<std::string>& exclusion_list);
   #endif
 
  private:
@@ -64,6 +70,7 @@ class RuntimeURLRequestContextGetter : public net::URLRequestContextGetter {
   scoped_ptr<net::URLRequestContext> url_request_context_;
   content::ProtocolHandlerMap protocol_handlers_;
   content::URLRequestInterceptorScopedVector request_interceptors_;
+  scoped_ptr<net::ProxyConfigServiceAndroid> android_proxy_config_service_;
 
   DISALLOW_COPY_AND_ASSIGN(RuntimeURLRequestContextGetter);
 };

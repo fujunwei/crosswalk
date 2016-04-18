@@ -104,6 +104,7 @@ RuntimeURLRequestContextGetter::RuntimeURLRequestContextGetter(
   config_service->set_exclude_pac_url(true);
 
   proxy_config_service_.reset(config_service);
+  android_proxy_config_service_.reset(config_service);
 #else
   proxy_config_service_.reset(
       net::ProxyService::CreateSystemProxyConfigService(
@@ -320,6 +321,21 @@ void RuntimeURLRequestContextGetter::UpdateAcceptLanguages(
     return;
   storage_->set_http_user_agent_settings(new net::StaticHttpUserAgentSettings(
       accept_languages, xwalk::GetUserAgent()));
+}
+
+void RuntimeURLRequestContextGetter::ProxySettingsChanged(
+    const std::string& host,
+    int port,
+    const std::string& pac_url,
+    const std::vector<std::string>& exclusion_list) {
+  // net::ProxyConfigServiceAndroid* config_service =
+  //     static_cast<net::ProxyConfigServiceAndroid*>(proxy_config_service_.get());
+  LOG(ERROR) << "==== in RuntimeURLRequestContextGetter::ProxySettingsChanged " << host;
+  if (host.empty()) {
+    android_proxy_config_service_->ProxySettingsChanged();
+  } else {
+    android_proxy_config_service_->ProxySettingsChangedTo(host, port, pac_url, exclusion_list);
+  }
 }
 #endif
 

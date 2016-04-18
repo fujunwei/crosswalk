@@ -111,6 +111,12 @@ class XWalkBrowserContext
   void CreateUserPrefServiceIfNecessary();
 
   void UpdateAcceptLanguages(const std::string& accept_languages);
+
+  void ProxySettingsChanged(
+      const std::string& host,
+      int port,
+      const std::string& pac_url,
+      const std::vector<std::string>& exclusion_list);
 #endif
 
  private:

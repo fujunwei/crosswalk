@@ -792,6 +792,16 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
         mContent.setBackgroundColor(color);
     }
 
+    /**
+     * Update proxy.
+     */
+    @XWalkAPI
+    public void proxySettingsChanged(String host, int port, String pacUrl, String[] exclusionList) {
+        if (mContent == null) return;
+        checkThreadSafety();
+        mContent.proxySettingsChanged(host, port, pacUrl, exclusionList);
+    }
+
     // We can't let XWalkView's setLayerType call to this via reflection as this method
     // may be called in XWalkView constructor but the XWalkView is not ready yet and then
     // UnsupportedOperationException is thrown, see XWALK-5021/XWALK-5047.
@@ -998,25 +1008,30 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
         return mContent.getRoutingID();
     }
 
-    boolean canGoBack() {
+
+    @XWalkAPI
+    public boolean canGoBack() {
         if (mContent == null) return false;
         checkThreadSafety();
         return mContent.canGoBack();
     }
 
-    void goBack() {
+    @XWalkAPI
+    public void goBack() {
         if (mContent == null) return;
         checkThreadSafety();
         mContent.goBack();
     }
 
-    boolean canGoForward() {
+    @XWalkAPI
+    public boolean canGoForward() {
         if (mContent == null) return false;
         checkThreadSafety();
         return mContent.canGoForward();
     }
 
-    void goForward() {
+    @XWalkAPI
+    public void goForward() {
         if (mContent == null) return;
         checkThreadSafety();
         mContent.goForward();

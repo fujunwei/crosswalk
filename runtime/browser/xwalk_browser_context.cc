@@ -400,6 +400,18 @@ void XWalkBrowserContext::UpdateAcceptLanguages(
     return;
   url_request_context_getter->UpdateAcceptLanguages(accept_languages);
 }
+
+void XWalkBrowserContext::ProxySettingsChanged(
+      const std::string& host,
+      int port,
+      const std::string& pac_url,
+      const std::vector<std::string>& exclusion_list) {
+  RuntimeURLRequestContextGetter* url_request_context_getter =
+      url_request_getter_.get();
+  if (!url_request_context_getter)
+    return;
+  url_request_context_getter->ProxySettingsChanged(host, port, pac_url, exclusion_list);
+}
 #endif
 
 }  // namespace xwalk

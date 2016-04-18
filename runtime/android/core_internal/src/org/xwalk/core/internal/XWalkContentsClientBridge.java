@@ -894,4 +894,13 @@ class XWalkContentsClientBridge extends XWalkContentsClient
     private native void nativeDownloadIcon(long nativeXWalkContentsClientBridge, String url);
     private native void nativeProvideClientCertificateResponse(
             long nativeXWalkContentsClientBridge, int id, byte[][] certChain, AndroidPrivateKey androidKey);
+    /**
+     * See net/proxy/proxy_config_service_android.cc
+     */
+    // private native void nativeProxySettingsChangedTo(long nativePtr,
+    //                                                  String host,
+    //                                                  int port,
+    //                                                  String pacUrl,
+    //                                                  String[] exclusionList);
+    // private native void nativeProxySettingsChanged(long nativePtr);
 }
