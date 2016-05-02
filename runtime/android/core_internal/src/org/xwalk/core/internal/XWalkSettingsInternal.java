@@ -280,6 +280,7 @@ public class XWalkSettingsInternal {
     /**
      * See {@link android.webkit.WebSettings#setAllowFileAccess}.
      */
+    @XWalkAPI
     public void setAllowFileAccess(boolean allow) {
         synchronized (mXWalkSettingsLock) {
             if (mAllowFileUrlAccess != allow) {
@@ -376,6 +377,7 @@ public class XWalkSettingsInternal {
     /**
      * See {@link android.webkit.WebSettings#setLoadsImagesAutomatically}.
      */
+    @XWalkAPI
     public void setLoadsImagesAutomatically(boolean flag) {
         synchronized (mXWalkSettingsLock) {
             if (mLoadsImagesAutomatically != flag) {
@@ -567,6 +569,7 @@ public class XWalkSettingsInternal {
     /**
      * See {@link android.webkit.WebSettings#setDomStorageEnabled}.
      */
+    @XWalkAPI
     public void setDomStorageEnabled(boolean flag) {
         synchronized (mXWalkSettingsLock) {
             if (mDomStorageEnabled != flag) {
