@@ -1109,7 +1109,8 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
         mContent.goForward();
     }
 
-    void clearHistory() {
+    @XWalkAPI
+    public void clearHistory() {
         if (mContent == null) return;
         checkThreadSafety();
         mContent.clearHistory();
