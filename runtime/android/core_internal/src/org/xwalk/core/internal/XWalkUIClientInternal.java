@@ -522,4 +522,35 @@ public class XWalkUIClientInternal {
         mDialog.show();
         return false;
     }
+
+    /**
+     * Notify the host application that web content from the specified origin
+     * is attempting to use the Geolocation API, but no permission state is
+     * currently set for that origin. The host application should invoke the
+     * specified callback with the desired permission state. See
+     * {@link GeolocationPermissions} for details.
+     * @param origin The origin of the web content attempting to use the
+     *               Geolocation API.
+     * @param callback The callback to use to set the permission state for the
+     *                 origin.
+     * @since 6.0
+     */
+    @XWalkAPI
+    public void onGeolocationPermissionsShowPrompt(String origin,
+            XWalkGeolocationCallbackInternal callback) {
+        // Allow all origins for geolocation requests here for Crosswalk.
+        // TODO(yongsheng): Need to define a UI prompt?
+        callback.invoke(origin, true, false);
+    }
+
+    /**
+     * Notify the host application that a request for Geolocation permissions,
+     * made with a previous call to
+     * {@link #onGeolocationPermissionsShowPrompt(String,XWalkGeolocationCallbackInternal) onGeolocationPermissionsShowPrompt()}
+     * has been canceled. Any related UI should therefore be hidden.
+     * @since 6.0
+     */
+    @XWalkAPI
+    public void onGeolocationPermissionsHidePrompt() {
+    }
 }

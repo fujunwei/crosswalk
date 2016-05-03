@@ -48,6 +48,8 @@ CLASSES_TO_BE_PROCESS = [
     'XWalkWebResourceRequestHandlerInternal',
     'XWalkWebResourceRequestInternal',
     'XWalkWebResourceResponseInternal',
+    'XWalkGeolocationCallbackHandlerInternal',
+    'XWalkGeolocationCallbackInternal',
 ]
 
 REFLECTION_HERLPER = [

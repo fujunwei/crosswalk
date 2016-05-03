@@ -48,6 +48,7 @@ import org.chromium.net.AndroidPrivateKey;
 import org.chromium.net.DefaultAndroidKeyStore;
 
 import org.xwalk.core.internal.XWalkUIClientInternal.LoadStatusInternal;
+import org.xwalk.core.internal.XWalkGeolocationCallbackInternal;
 import android.content.Context;
 import java.util.Map;
 import android.media.MediaPlayer;
@@ -385,16 +386,18 @@ class XWalkContentsClientBridge extends XWalkContentsClient
 
     @Override
     public void onGeolocationPermissionsShowPrompt(String origin,
-            XWalkGeolocationPermissions.Callback callback) {
+            XWalkGeolocationCallbackInternal callback) {
         if (mXWalkWebChromeClient != null && isOwnerActivityRunning()) {
-            mXWalkWebChromeClient.onGeolocationPermissionsShowPrompt(origin, callback);
+            //mXWalkWebChromeClient.onGeolocationPermissionsShowPrompt(origin, callback);
+            // mXWalkUIClient.onGeolocationPermissionsShowPrompt(origin, callback);
         }
     }
 
     @Override
     public void onGeolocationPermissionsHidePrompt() {
         if (mXWalkWebChromeClient != null && isOwnerActivityRunning()) {
-            mXWalkWebChromeClient.onGeolocationPermissionsHidePrompt();
+            //mXWalkWebChromeClient.onGeolocationPermissionsHidePrompt();
+            mXWalkUIClient.onGeolocationPermissionsHidePrompt();
         }
     }
 

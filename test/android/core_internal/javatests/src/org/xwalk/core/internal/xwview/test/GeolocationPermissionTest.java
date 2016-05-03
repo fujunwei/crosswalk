@@ -13,7 +13,7 @@ import org.chromium.base.test.util.DisabledTest;
 import org.chromium.base.test.util.Feature;
 import org.xwalk.core.internal.XWalkViewInternal;
 import org.xwalk.core.internal.XWalkClient;
-import org.xwalk.core.internal.XWalkGeolocationPermissions;
+import org.xwalk.core.internal.XWalkGeolocationCallbackInternal;
 import org.xwalk.core.internal.XWalkWebChromeClient;
 
 /**
@@ -43,16 +43,16 @@ public class GeolocationPermissionTest extends XWalkViewInternalTestBase {
             }
 
             private int mCalledCount = 0;
-
+/*
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin,
-                    XWalkGeolocationPermissions.Callback callback) {
+                    XWalkGeolocationCallbackInternal callback) {
                 // The origin is empty for data stream.
                 assertTrue(origin.isEmpty());
                 callback.invoke(origin, true, true);
                 mCalledCount++;
             }
-
+*/
             public int getCalledCount() {
                 return mCalledCount;
             }

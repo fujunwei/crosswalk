@@ -780,23 +780,20 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
         }
     }
 
-    private class XWalkGeolocationCallback implements XWalkGeolocationPermissions.Callback {
-        @Override
-        public void invoke(final String origin, final boolean allow, final boolean retain) {
-            ThreadUtils.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (retain) {
-                        if (allow) {
-                            mGeolocationPermissions.allow(origin);
-                        } else {
-                            mGeolocationPermissions.deny(origin);
-                        }
+    public void invokeGeolocationCallback(final String origin, final boolean allow, final boolean retain) {
+        ThreadUtils.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (retain) {
+                    if (allow) {
+                        mGeolocationPermissions.allow(origin);
+                    } else {
+                        mGeolocationPermissions.deny(origin);
                     }
-                    nativeInvokeGeolocationCallback(mNativeContent, allow, origin);
                 }
-            });
-        }
+                nativeInvokeGeolocationCallback(mNativeContent, allow, origin);
+            }
+        });
     }
 
     @CalledByNative
@@ -815,7 +812,7 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
             return;
         }
         mContentsClientBridge.onGeolocationPermissionsShowPrompt(
-                origin, new XWalkGeolocationCallback());
+                origin, new XWalkGeolocationCallbackHandlerInternal());
     }
 
     @CalledByNative

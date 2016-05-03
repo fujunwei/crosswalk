@@ -193,7 +193,7 @@ abstract class XWalkContentsClient extends ContentViewClient {
             String mimeType, long contentLength);
 
     public abstract void onGeolocationPermissionsShowPrompt(String origin,
-            XWalkGeolocationPermissions.Callback callback);
+            XWalkGeolocationCallbackInternal callback);
 
     public abstract void onGeolocationPermissionsHidePrompt();
 

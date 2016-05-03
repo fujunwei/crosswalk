@@ -237,13 +237,13 @@ public class XWalkWebChromeClient {
      * @param callback The callback to use to set the permission state for the
      *                 origin.
      */
-    public void onGeolocationPermissionsShowPrompt(String origin,
-            XWalkGeolocationPermissions.Callback callback) {
+/*    public void onGeolocationPermissionsShowPrompt(String origin,
+            XWalkGeolocationCallbackInternal callback) {
         // Allow all origins for geolocation requests here for Crosswalk.
         // TODO(yongsheng): Need to define a UI prompt?
         callback.invoke(origin, true, false);
     }
-
+*/
     /**
      * Notify the host application that a request for Geolocation permissions,
      * made with a previous call to

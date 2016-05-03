@@ -24,10 +24,10 @@ public final class XWalkGeolocationPermissions {
      * Callback interface used by the browser to report a Geolocation permission
      * state set by the user in response to a permissions prompt.
      */
-    public interface Callback {
+/*    public interface Callback {
         public void invoke(String origin, boolean allow, boolean remember);
     };
-
+*/
     private static final String PREF_PREFIX =
             XWalkGeolocationPermissions.class.getCanonicalName() + "%";
     private final SharedPreferences mSharedPreferences;
