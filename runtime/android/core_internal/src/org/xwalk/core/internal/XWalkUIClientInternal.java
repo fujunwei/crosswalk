@@ -536,7 +536,7 @@ public class XWalkUIClientInternal {
      * @since 6.0
      */
     @XWalkAPI
-    public void onGeolocationPermissionsShowPrompt(String origin,
+    public void onGeolocationPermissionsShowPrompt(XWalkViewInternal view, String origin,
             XWalkGeolocationCallbackInternal callback) {
         // Allow all origins for geolocation requests here for Crosswalk.
         // TODO(yongsheng): Need to define a UI prompt?

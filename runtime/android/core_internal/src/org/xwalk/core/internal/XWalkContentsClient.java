@@ -28,6 +28,7 @@ import java.util.HashMap;
 import org.chromium.content.browser.ContentViewClient;
 import org.chromium.content_public.browser.WebContents;
 import org.chromium.content_public.browser.WebContentsObserver;
+// import org.chromium.media.ExMediaPlayer;
 import org.chromium.net.AndroidPrivateKey;
 import org.chromium.net.DefaultAndroidKeyStore;
 import org.chromium.net.NetError;
@@ -172,7 +173,9 @@ abstract class XWalkContentsClient extends ContentViewClient {
 
     public abstract boolean shouldOverrideUrlLoading(String url);
 
-    public abstract boolean shouldOverrideResourceLoading(MediaPlayer mediaPlayer, Context context, Uri uri, Map<String, String> headers);
+    // public abstract boolean shouldOverrideResourceLoading(ExMediaPlayer mediaPlayer, Context context, Uri uri, Map<String, String> headers);
+
+    // public abstract XWalkExMediaPlayerInternal getExMediaPlayer(int progress);
 
     public abstract void onUnhandledKeyEvent(KeyEvent event);
 

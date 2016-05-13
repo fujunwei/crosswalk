@@ -50,6 +50,7 @@ CLASSES_TO_BE_PROCESS = [
     'XWalkWebResourceResponseInternal',
     'XWalkGeolocationCallbackHandlerInternal',
     'XWalkGeolocationCallbackInternal',
+    'XWalkExMediaPlayerInternal',
 ]
 
 REFLECTION_HERLPER = [

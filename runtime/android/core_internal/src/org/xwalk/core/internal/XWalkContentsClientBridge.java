@@ -44,6 +44,7 @@ import org.chromium.components.navigation_interception.NavigationParams;
 import org.chromium.content.browser.ContentVideoViewClient;
 import org.chromium.content.browser.ContentViewDownloadDelegate;
 import org.chromium.content.browser.DownloadInfo;
+// import org.chromium.media.ExMediaPlayer;
 import org.chromium.net.AndroidPrivateKey;
 import org.chromium.net.DefaultAndroidKeyStore;
 
@@ -75,6 +76,7 @@ class XWalkContentsClientBridge extends XWalkContentsClient
     private XWalkNavigationHandler mNavigationHandler;
     private XWalkNotificationService mNotificationService;
     private Handler mUiThreadHandler;
+    private XWalkExMediaPlayerInternal mXWalkExMediaPlayerInternal;
 
     /** State recording variables */
     // For fullscreen state.
@@ -161,6 +163,18 @@ class XWalkContentsClientBridge extends XWalkContentsClient
         mXWalkResourceClient = new XWalkResourceClientInternal(mXWalkView);
     }
 
+    public void setExMediaPlayer(XWalkExMediaPlayerInternal mediaPlayer) {
+        // If it's null, use Crosswalk implementation.
+        if (mediaPlayer != null) {
+            mXWalkExMediaPlayerInternal = mediaPlayer;
+            return;
+        }
+        mXWalkExMediaPlayerInternal = new XWalkExMediaPlayerInternal();
+    }
+
+    public XWalkExMediaPlayerInternal getExMediaPlayer() {
+        return mXWalkExMediaPlayerInternal;
+    }
 
     public void setXWalkWebChromeClient(XWalkWebChromeClient client) {
         // If it's null, use Crosswalk implementation.
@@ -215,15 +229,23 @@ class XWalkContentsClientBridge extends XWalkContentsClient
         return false;
     }
 
-    @Override
-    public boolean shouldOverrideResourceLoading(MediaPlayer mediaPlayer,
-            Context context, Uri uri, Map<String, String> headers) {
-        if (mXWalkResourceClient != null && mXWalkView != null) {
-            return mXWalkResourceClient.shouldOverrideResourceLoading(mXWalkView,
-                    mediaPlayer, context, uri, headers);
-        }
-        return false;
-    }
+    // @Override
+    // public boolean shouldOverrideResourceLoading(ExMediaPlayer mediaPlayer,
+    //         Context context, Uri uri, Map<String, String> headers) {
+    //     if (mXWalkResourceClient != null && mXWalkView != null) {
+    //         return mXWalkResourceClient.shouldOverrideResourceLoading(mXWalkView,
+    //                 mediaPlayer, context, uri, headers);
+    //     }
+    //     return false;
+    // }
+
+    // @Override
+    // public XWalkExMediaPlayerInternal getExMediaPlayer(int progress) {
+    //     if (mXWalkResourceClient != null && mXWalkView != null) {
+    //         return mXWalkView.getExMediaPlayer();
+    //     }
+    //     return null;
+    // }
 
     @Override
     public boolean shouldOverrideKeyEvent(KeyEvent event) {

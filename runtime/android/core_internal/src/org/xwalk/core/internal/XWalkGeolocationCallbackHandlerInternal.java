@@ -19,6 +19,6 @@ public class XWalkGeolocationCallbackHandlerInternal implements XWalkGeolocation
     @Override
     @XWalkAPI
     public void invoke(String origin, boolean allow, boolean retain) {
-        mContent.invokeGeolocationCallback(origin, allow, retain);
+//        mContent.invokeGeolocationCallback(origin, allow, retain);
     }
 }

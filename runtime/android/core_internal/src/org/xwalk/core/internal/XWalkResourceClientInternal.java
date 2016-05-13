@@ -262,11 +262,16 @@ public class XWalkResourceClientInternal {
         return false;
     }
 
-    @XWalkAPI
-    public boolean shouldOverrideResourceLoading(XWalkViewInternal view,
-            MediaPlayer mediaPlayer, Context context, Uri uri, Map<String, String> headers) {
-        return false;
-    }
+    // @XWalkAPI
+    // public boolean shouldOverrideResourceLoading(XWalkViewInternal view,
+    //         ExMediaPlayer mediaPlayer, Context context, Uri uri, Map<String, String> headers) {
+    //     return false;
+    // }
+
+    // @XWalkAPI
+    // public XWalkExMediaPlayerInternal getExMediaPlayer(XWalkViewInternal view, int progress) {
+    //     return null;
+    // }
 
     /**
       * Notify the host application that an SSL error occurred while loading a

@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 
 import org.chromium.media.MediaPlayerBridge;
+import org.chromium.media.ExMediaPlayer;
 
 import java.io.File;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ class XWalkMediaPlayerResourceLoadingFilter extends
     }
 
     @Override
-    public boolean shouldOverrideResourceLoading(MediaPlayer mediaPlayer,
+    public boolean shouldOverrideResourceLoading(ExMediaPlayer mediaPlayer,
             Context context, Uri uri, Map<String, String> headers) {
         String scheme = uri.getScheme();
         if (scheme == null) return false;
@@ -52,9 +53,21 @@ class XWalkMediaPlayerResourceLoadingFilter extends
             }
         } else if (scheme.equals("http")) {
             // Send to XWalkResourceClient
-            return mContentsClientBridge.shouldOverrideResourceLoading(mediaPlayer, context, uri, headers);
+            // return mContentsClientBridge.shouldOverrideResourceLoading(mediaPlayer, context, uri, headers);
+            return false;
         }
 
         return false;
+    }
+
+    @Override
+    public ExMediaPlayer getExMediaPlayer() {
+        ExMediaPlayer exMediaPlayer = mContentsClientBridge.getExMediaPlayer();
+
+        if (exMediaPlayer == null) {
+            exMediaPlayer = new ExMediaPlayer();
+        }
+
+        return exMediaPlayer;  
     }
 }

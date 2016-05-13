@@ -368,6 +368,11 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
         mContentsClientBridge.setXWalkWebChromeClient(client);
     }
 
+    public void setExMediaPlayer(XWalkExMediaPlayerInternal mediaPlayer) {
+        if (mNativeContent == 0) return;
+        mContentsClientBridge.setExMediaPlayer(mediaPlayer);
+    }
+
     public XWalkWebChromeClient getXWalkWebChromeClient() {
         if (mNativeContent == 0) return null;
         return mContentsClientBridge.getXWalkWebChromeClient();

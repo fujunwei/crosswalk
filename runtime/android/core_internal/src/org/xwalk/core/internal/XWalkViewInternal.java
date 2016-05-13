@@ -181,6 +181,7 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
     private XWalkActivityStateListener mActivityStateListener;
     private ValueCallback<Uri> mFilePathCallback;
     private String mCameraPhotoPath;
+    private XWalkExMediaPlayerInternal mXWalkExMediaPlayerInternal;
 
     /**
      * Normal reload mode as default.
@@ -209,7 +210,7 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
      * @since 6.0
      */
     @XWalkAPI(preWrapperLines = {
-                  "        super(${param1}, null);",
+                "        super(${param1}, null);",
                   "        SurfaceView surfaceView = new SurfaceView(${param1});",
                   "        surfaceView.setLayoutParams(new ViewGroup.LayoutParams(0, 0));",
                   "        addView(surfaceView);"},
@@ -780,6 +781,13 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
         if (mContent == null) return;
         checkThreadSafety();
         mContent.setResourceClient(client);
+    }
+
+    @XWalkAPI(reservable = true)
+    public void setExMediaPlayer(XWalkExMediaPlayerInternal mediaPlayer) {
+        if (mContent == null) return;
+        checkThreadSafety();
+        mContent.setExMediaPlayer(mediaPlayer);
     }
 
     /**
