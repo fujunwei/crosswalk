@@ -49,6 +49,7 @@ CLASSES_TO_BE_PROCESS = [
     'XWalkWebResourceRequestHandlerInternal',
     'XWalkWebResourceRequestInternal',
     'XWalkWebResourceResponseInternal',
+    'XWalkExMediaPlayerInternal',
 ]
 
 REFLECTION_HERLPER = [

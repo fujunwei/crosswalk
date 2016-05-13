@@ -133,7 +133,7 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
         mGeolocationPermissions = new XWalkGeolocationPermissions(sharedPreferences);
 
         MediaPlayerBridge.setResourceLoadingFilter(
-                new XWalkMediaPlayerResourceLoadingFilter());
+                new XWalkMediaPlayerResourceLoadingFilter(mContentsClientBridge));
 
         setNativeContent(nativeInit());
 
@@ -371,6 +371,11 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
     public void setXWalkWebChromeClient(XWalkWebChromeClient client) {
         if (mNativeContent == 0) return;
         mContentsClientBridge.setXWalkWebChromeClient(client);
+    }
+
+    public void setExMediaPlayer(XWalkExMediaPlayerInternal mediaPlayer) {
+        if (mNativeContent == 0) return;
+        mContentsClientBridge.setExMediaPlayer(mediaPlayer);
     }
 
     public XWalkWebChromeClient getXWalkWebChromeClient() {
